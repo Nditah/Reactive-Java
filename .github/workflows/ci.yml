@@ -1,0 +1,52 @@
+name: Build & Test Reactive Java 25 Workshop
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      run_stress_benchmarks:
+        description: 'Run TPS/TPM/p99 stress benchmarks after unit tests'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build-and-test:
+    name: Java 25 LTS (Temurin) + Maven + JUnit 5
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 25 LTS (Eclipse Temurin)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Set up Node.js (for npm script runner)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Compile all 12 lessons (npm run build)
+        run: npm run build
+
+      - name: Run unit & integration test suite (npm test)
+        run: npm test
+
+      - name: Run TPS / TPM / p99 stress benchmarks (optional)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_stress_benchmarks }}
+        run: npm run stress
+
+      - name: Upload JUnit test reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-test-reports
+          path: target/surefire-reports/

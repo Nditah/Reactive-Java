@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Attach to npm run debug:lesson (Port 5005)",
+      "request": "attach",
+      "hostName": "localhost",
+      "port": 5005,
+      "projectName": "reactive-coding"
+    },
+    {
+      "type": "java",
+      "name": "Debug Current Lesson File (F5)",
+      "request": "launch",
+      "mainClass": "${fileBasenameNoExtension}",
+      "projectName": "reactive-coding",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "java",
+      "name": "Debug Lesson 10 (Live WebFlux Server)",
+      "request": "launch",
+      "mainClass": "com.telixia.reactivecoding.Lesson10",
+      "projectName": "reactive-coding",
+      "console": "integratedTerminal"
+    }
+  ]
+}

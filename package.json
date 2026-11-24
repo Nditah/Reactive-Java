@@ -1,0 +1,63 @@
+{
+  "name": "reactive-java",
+  "version": "1.0.0",
+  "private": true,
+  "description": "JS-friendly npm task runner for High-Performance Reactive & Concurrent Java 25",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Nditah",
+    "organization": "Telixia"
+  },
+  "keywords": [
+    "java",
+    "java-25",
+    "reactive-programming",
+    "project-reactor",
+    "spring-webflux",
+    "spring-boot",
+    "virtual-threads",
+    "scoped-value",
+    "concurrency",
+    "high-performance-computing",
+    "backpressure",
+    "fintech",
+    "trading-systems"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nditah/Reactive-Java"
+  },
+  "bugs": {
+    "url": "https://github.com/Nditah/Reactive-Java"
+  },
+  "homepage": "https://github.com/Nditah/Reactive-Java",
+  "scripts": {
+    "postinstall": "mvn dependency:resolve",
+    "build": "mvn clean compile",
+    "package": "mvn clean package -DskipTests",
+    "test": "mvn test -DexcludedGroups=stress",
+    "stress": "mvn test -Dgroups=stress",
+    "stress:engine": "mvn test -Dtest=OrderEngineStressTest",
+    "stress:http": "mvn test -Dtest=WebFluxHttpStressTest",
+    "test:lesson09": "mvn test -Dtest=Lesson09Test",
+    "test:predeploy": "npm run build && npm test && npm run stress",
+    "deps": "mvn dependency:tree",
+    "start": "mvn spring-boot:run -Dspring-boot.run.main-class=com.telixia.reactivecoding.Lesson10",
+    "debug:lesson": "mvn compile exec:exec -Dexec.executable=java -Dexec.args=\"-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005 -classpath %classpath com.telixia.reactivecoding.Lesson11\"",
+    "lesson01": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson01",
+    "lesson02": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson02",
+    "lesson03": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson03",
+    "lesson04": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson04",
+    "lesson05": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson05",
+    "lesson06": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson06",
+    "lesson07": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson07",
+    "lesson08": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson08",
+    "lesson09": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson09",
+    "lesson10": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson10",
+    "lesson11": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson11",
+    "lesson12": "mvn compile exec:java -Dexec.mainClass=com.telixia.reactivecoding.Lesson12"
+  }
+}
